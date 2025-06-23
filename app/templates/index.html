@@ -36,5 +36,55 @@
         </div>
         <h1>{{ title }}</h1>
     </div>
+
+    <div class="work-experience">
+        <h2>Work Experience</h2>
+        {% for experience in work_experiences %}
+        <div class="work-experience-item">
+            <h3>{{ experience.title }}</h3>
+            <p>{{ experience.company }}</p>
+            <p>{{ experience.period }}</p>
+            <ul>
+                {% for responsibility in experience.responsibilities %}
+                <li>{{ responsibility }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="education">
+        <h2>Education</h2>
+        {% for edu in education %}
+        <div class="education-item">
+            <h3>{{ edu.institution }}</h3>
+            <p>{{ edu.degree }}</p>
+            <p>{{ edu.period }}</p>
+            <p>GPA: {{ edu.gpa }}</p>
+            {% if edu.courses %}
+            <p>Relevant Courses: {{ edu.courses }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="hobbies">
+        <h2>Hobbies</h2>
+        {% for hobby in hobbies %}
+        <div class="hobbies-item">
+            <h3>{{ hobby.title }}</h3>
+            <p>{{ hobby.description }}</p>
+            <img src="{{ hobby.image }}" alt="{{ hobby.title }}">
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="my-map">
+        <h2>All of the countries I've been to</h2>
+        <div class="my-map-item">
+            <p>I'm from Mississauga, Ontario, Canada. Other countries I've been to include the United States, Denmark, Spain, Portugal, Dominican Republic, India, France, and the United Kingdom.</p>
+            <img src="./static/img/my-map.png" alt="Travel Map">
+        </div>
+    </div>
 </body>
 </html>
