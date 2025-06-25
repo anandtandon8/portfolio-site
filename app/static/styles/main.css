@@ -105,7 +105,32 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.work-experience {
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    padding: 40px 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.about-me {
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    padding: 40px 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .hobbies h2 {
+    color: #1d539f;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.work-experience h2 {
     color: #1d539f;
     font-size: 32px;
     font-weight: 600;
@@ -120,6 +145,18 @@ body {
 }
 
 .hobbies-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.work-experience-item {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.work-experience-item:last-child {
     border-bottom: none;
     margin-bottom: 0;
     padding-bottom: 0;
@@ -146,4 +183,45 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: block;
     margin: 0 auto;
+}
+
+.work-experience-item h3 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.work-experience-item p {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.work-experience-item ul {
+    margin-top: 15px;
+    padding-left: 20px;
+}
+
+.work-experience-item li {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.about-me-text h2 {
+    color: #1d539f;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.about-me-text p {
+    color: #333;
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 0;
+    text-align: justify;
 }
