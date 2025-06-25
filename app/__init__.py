@@ -56,19 +56,6 @@ def index():
         }
     ]
 
-    hobbies = [
-        {
-            'title': 'Photography',
-            'description': 'I love taking photos of nature and the streets. I lost my camera a year ago, and I just got back into it with a new one, it\'s been great!',
-            'image': './static/img/photography_example.jpg'
-        },
-        {
-            'title': 'Programming',
-            'description': 'I love programming and learning new technologies. My favourite part is probably high level systems design like in the image below.',
-            'image': './static/img/programming_example.png'
-        }
-    ]
-
     about_me = {
         'description': 'I am currently studying at the University of Waterloo, with a major in Software Engineering. I just wrapped up my first year and am an aspiring software engineer. I also do photography on the side for fun.'
     }
@@ -87,3 +74,21 @@ def index():
                          hobbies=hobbies,
                          about_me=about_me,
                          travel_map=travel_map)
+
+
+@app.route('/hobbies')
+def hobbies():
+    hobbies = [
+        {
+            'title': 'Photography',
+            'description': 'I love taking photos of nature and the streets. I lost my camera a year ago, and I just got back into it with a new one, it\'s been great!',
+            'image': './static/img/photography_example.jpg'
+        },
+        {
+            'title': 'Programming',
+            'description': 'I love programming and learning new technologies. My favourite part is probably high level systems design like in the image below.',
+            'image': './static/img/programming_example.png'
+        }
+    ]
+    
+    return render_template('hobbies.html', title="My Hobbies", hobbies=hobbies)

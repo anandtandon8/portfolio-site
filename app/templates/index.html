@@ -64,17 +64,6 @@
         </div>
     </div>
 
-    <div class="hobbies">
-        <h2>Hobbies</h2>
-        {% for hobby in hobbies %}
-        <div class="hobbies-item">
-            <h3>{{ hobby.title }}</h3>
-            <p>{{ hobby.description }}</p>
-            <img src="{{ hobby.image }}">
-        </div>
-        {% endfor %}
-    </div>
-
     <div class="work-experience">
         <h2>Work Experience</h2>
         {% for experience in work_experiences %}
