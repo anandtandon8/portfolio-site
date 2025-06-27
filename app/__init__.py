@@ -67,7 +67,7 @@ def index():
     }
 
     return render_template('index.html', 
-                         title="MLH Fellow", 
+                         title="Anand Tandon's Portfolio", 
                          url=os.getenv("URL"),
                          work_experiences=work_experiences,
                          education=education,
