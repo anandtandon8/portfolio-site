@@ -57,7 +57,7 @@ def index():
     ]
 
     about_me = {
-        'description': 'I am currently studying at the University of Waterloo, with a major in Software Engineering. I just wrapped up my first year and am an aspiring software engineer. I also do photography on the side for fun.'
+        'description': 'I\'m currently studying at the University of Waterloo, with a major in Software Engineering. I just wrapped up my first year and am an aspiring software engineer. I also do photography on the side for fun.'
     }
 
     travel_map = {
