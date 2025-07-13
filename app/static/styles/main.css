@@ -342,7 +342,7 @@ body {
     content: '';
     position: absolute;
     left: 50%;
-    top: 120px;
+    top: 90px;
     bottom: 0;
     width: 4px;
     background-color: #1d539f;
@@ -365,9 +365,6 @@ body {
     margin-bottom: 60px;
     width: 45%;
     z-index: 2;
-    display: flex;
-    align-items: center;
-    min-height: 120px;
 }
 
 .timeline-item:nth-child(odd) {
@@ -380,10 +377,20 @@ body {
     margin-right: 0;
 }
 
-.timeline-dot {
+.timeline-item::before {
+    content: '';
     position: absolute;
+    top: 32px;
+    left: 100%;
+    width: 0;
+    height: 0;
+}
+
+.timeline-item:nth-child(odd)::before,
+.timeline-item:nth-child(even)::before {
     left: 50%;
     transform: translateX(-50%);
+    top: 32px;
     width: 20px;
     height: 20px;
     background-color: #1d539f;
@@ -396,8 +403,7 @@ body {
 .timeline-item::after {
     content: '';
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 41px;
     width: 50px;
     height: 2px;
     background-color: #1d539f;
