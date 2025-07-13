@@ -49,5 +49,23 @@
         </div>
         {% endfor %}
     </div>
+    <div class="timeline-form-container">
+        <h2>Share yours</h2>
+        <form class="timeline-form" action="/api/timeline_post" method="POST">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="content">Post</label>
+                <textarea id="content" name="content" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="timeline-submit-btn">Post</button>
+        </form>
+    </div>
 </body>
 </html>
