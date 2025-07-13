@@ -4,6 +4,7 @@ from playhouse.shortcuts import model_to_dict
 from peewee import *
 from flask import Flask, render_template, request
 from dotenv import load_dotenv
+from dateutil import parser
 
 load_dotenv()
 app = Flask(__name__)
@@ -133,7 +134,6 @@ def timeline():
     timeline_posts = [model_to_dict(p) for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())]
     for post in timeline_posts:
         if isinstance(post['created_at'], str):
-            from dateutil import parser
             post['created_at'] = parser.parse(post['created_at'])
         post['formatted_date'] = format_datetime(post['created_at'])
     return render_template('timeline.html', title="Timeline Posts", timeline_posts=timeline_posts)

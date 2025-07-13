@@ -365,6 +365,9 @@ body {
     margin-bottom: 60px;
     width: 45%;
     z-index: 2;
+    display: flex;
+    align-items: center;
+    min-height: 120px;
 }
 
 .timeline-item:nth-child(odd) {
@@ -380,8 +383,7 @@ body {
 .timeline-dot {
     position: absolute;
     left: 50%;
-    top: 50px;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     width: 20px;
     height: 20px;
     background-color: #1d539f;
@@ -394,7 +396,8 @@ body {
 .timeline-item::after {
     content: '';
     position: absolute;
-    top: 50px; /* Align with the dot */
+    top: 50%;
+    transform: translateY(-50%);
     width: 50px;
     height: 2px;
     background-color: #1d539f;
