@@ -127,7 +127,7 @@ def format_datetime(dt):
         time_str = dt.strftime(f"%-I:%M %p")
     except ValueError:
         time_str = dt.strftime(f"%#I:%M %p")
-    return dt.strftime(f"%B {day}, %Y, ") + time_str + " GMT"
+    return dt.strftime(f"%B {day}, %Y, ") + time_str + " ET"
 
 @app.route('/timeline')
 def timeline():
