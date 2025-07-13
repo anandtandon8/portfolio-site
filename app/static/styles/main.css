@@ -342,7 +342,7 @@ body {
     content: '';
     position: absolute;
     left: 50%;
-    top: 90px;
+    top: 120px;
     bottom: 0;
     width: 4px;
     background-color: #1d539f;
@@ -377,20 +377,11 @@ body {
     margin-right: 0;
 }
 
-.timeline-item::before {
-    content: '';
+.timeline-dot {
     position: absolute;
-    top: 32px;
-    left: 100%;
-    width: 0;
-    height: 0;
-}
-
-.timeline-item:nth-child(odd)::before,
-.timeline-item:nth-child(even)::before {
     left: 50%;
-    transform: translateX(-50%);
-    top: 32px;
+    top: 50px;
+    transform: translate(-50%, -50%);
     width: 20px;
     height: 20px;
     background-color: #1d539f;
@@ -403,7 +394,7 @@ body {
 .timeline-item::after {
     content: '';
     position: absolute;
-    top: 41px;
+    top: 50px; /* Align with the dot */
     width: 50px;
     height: 2px;
     background-color: #1d539f;

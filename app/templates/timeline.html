@@ -36,10 +36,11 @@
         <h2>{{ title }}</h2>
         {% for post in timeline_posts %}
         <div class="timeline-item">
+            <div class="timeline-dot"></div>
             <div class="timeline-box">
                 <div class="timeline-header">
                     <h3>{{ post.name }}</h3>
-                    <span class="timeline-date">{{ post.created_at }}</span>
+                    <span class="timeline-date">{{ post.formatted_date }}</span>
                 </div>
                 <div class="timeline-email">{{ post.email }}</div>
                 <div class="timeline-content">
