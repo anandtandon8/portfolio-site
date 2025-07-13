@@ -34,24 +34,26 @@
 
     <div class="timeline">
         <h2>{{ title }}</h2>
-        {% for post in timeline_posts %}
-        <div class="timeline-item">
-            <div class="timeline-box">
-                <div class="timeline-header">
-                    <h3>{{ post.name }}</h3>
-                    <span class="timeline-date">{{ post.formatted_date }}</span>
-                </div>
-                <div class="timeline-email">{{ post.email }}</div>
-                <div class="timeline-content">
-                    <p>{{ post.content }}</p>
+        <div id="timeline-posts">
+            {% for post in timeline_posts %}
+            <div class="timeline-item">
+                <div class="timeline-box">
+                    <div class="timeline-header">
+                        <h3>{{ post.name }}</h3>
+                        <span class="timeline-date">{{ post.formatted_date }}</span>
+                    </div>
+                    <div class="timeline-email">{{ post.email }}</div>
+                    <div class="timeline-content">
+                        <p>{{ post.content }}</p>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
     <div class="timeline-form-container">
         <h2>Share yours</h2>
-        <form class="timeline-form" action="/api/timeline_post" method="POST">
+        <form id="timeline-form" class="timeline-form" action="/api/timeline_post" method="POST">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
@@ -67,5 +69,41 @@
             <button type="submit" class="timeline-submit-btn">Post</button>
         </form>
     </div>
+    <script>
+    document.getElementById('timeline-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+      const response = await fetch('/api/timeline_post', {
+        method: 'POST',
+        body: formData
+      });
+      if (response.ok) {
+        const postsResponse = await fetch('/api/timeline_post');
+        const data = await postsResponse.json();
+        const postsContainer = document.getElementById('timeline-posts');
+        postsContainer.innerHTML = '';
+        data.timeline_posts.forEach(post => {
+          postsContainer.innerHTML += `
+            <div class="timeline-item">
+              <div class="timeline-box">
+                <div class="timeline-header">
+                  <h3>${post.name}</h3>
+                  <span class="timeline-date">${post.formatted_date || post.created_at}</span>
+                </div>
+                <div class="timeline-email">${post.email}</div>
+                <div class="timeline-content">
+                  <p>${post.content}</p>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+        form.reset();
+      } else {
+        alert('Failed to post!');
+      }
+    });
+    </script>
 </body>
 </html>
