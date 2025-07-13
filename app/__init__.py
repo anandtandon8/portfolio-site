@@ -112,10 +112,30 @@ def hobbies():
     
     return render_template('hobbies.html', title="My Hobbies", hobbies=hobbies)
 
+def ordinal(n):
+    if 10 <= n <= 20:
+        suffix = 'th'
+    else:
+        suffix = {1: 'st', 2: 'nd', 3: 'rd'}.get(n % 10, 'th')
+    return str(n) + suffix
+
+def format_datetime(dt):
+    day = ordinal(dt.day)
+
+    try:
+        time_str = dt.strftime(f"%-I:%M %p")
+    except ValueError:
+        time_str = dt.strftime(f"%#I:%M %p")
+    return dt.strftime(f"%B {day}, %Y, ") + time_str + " GMT"
+
 @app.route('/timeline')
 def timeline():
     timeline_posts = [model_to_dict(p) for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())]
-    
+    for post in timeline_posts:
+        if isinstance(post['created_at'], str):
+            from dateutil import parser
+            post['created_at'] = parser.parse(post['created_at'])
+        post['formatted_date'] = format_datetime(post['created_at'])
     return render_template('timeline.html', title="Timeline Posts", timeline_posts=timeline_posts)
 
 @app.route('/api/timeline_post', methods=['POST'])
