@@ -112,6 +112,12 @@ def hobbies():
     
     return render_template('hobbies.html', title="My Hobbies", hobbies=hobbies)
 
+@app.route('/timeline')
+def timeline():
+    timeline_posts = [model_to_dict(p) for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())]
+    
+    return render_template('timeline.hthml', title="Timeline Posts", timeline_posts=timeline_posts)
+
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
     name = request.form['name']

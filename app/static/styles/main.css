@@ -327,3 +327,70 @@ body {
     margin: 0;
     text-align: justify;
 }
+
+.timeline {
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    padding: 40px 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.timeline h2 {
+    color: #1d539f;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.timeline-item {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.timeline-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.timeline-header h3 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.timeline-date {
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #f5f5f5;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.timeline-email {
+    color: #1d539f;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.timeline-content p {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    text-align: justify;
+}
