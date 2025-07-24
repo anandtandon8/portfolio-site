@@ -9,10 +9,12 @@ from dateutil import parser
 load_dotenv()
 app = Flask(__name__)
 
+# create a mysql database
 mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"), user=os.getenv("MYSQL_USER"), password=os.getenv("MYSQL_PASSWORD"), host=os.getenv(" MYSQL_HOST"), port=3306)
 
 print(mydb)
 
+# a model (columns) for sql table for timeline posts
 class TimelinePost(Model):
     name = CharField()
     email = CharField()
@@ -113,6 +115,7 @@ def hobbies():
     
     return render_template('hobbies.html', title="My Hobbies", hobbies=hobbies)
 
+# add ordinal suffixes to numbers
 def ordinal(n):
     if 10 <= n <= 20:
         suffix = 'th'
@@ -120,6 +123,7 @@ def ordinal(n):
         suffix = {1: 'st', 2: 'nd', 3: 'rd'}.get(n % 10, 'th')
     return str(n) + suffix
 
+# generate a more visually appealing datetime for the timeline posts
 def format_datetime(dt):
     day = ordinal(dt.day)
 
@@ -131,7 +135,7 @@ def format_datetime(dt):
 
 @app.route('/timeline')
 def timeline():
-    timeline_posts = [model_to_dict(p) for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())]
+    timeline_posts = [model_to_dict(p) for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())]     # fetch posts from database using peewee
     for post in timeline_posts:
         if isinstance(post['created_at'], str):
             post['created_at'] = parser.parse(post['created_at'])
@@ -143,18 +147,19 @@ def post_time_line_post():
     name = request.form['name']
     email = request.form['email']
     content = request.form['content']
-    timeline_post = TimelinePost.create(name=name, email=email, content=content)
+    timeline_post = TimelinePost.create(name=name, email=email, content=content)    # add to database using peewee
     
     return model_to_dict(timeline_post)
 
 @app.route('/api/timeline_post', methods=['GET'])
 def get_time_line_post():
-    return {'timeline_posts': [model_to_dict(p) for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())]}
+    return {'timeline_posts': [model_to_dict(p) for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())]}  
 
+# this should have try/catch for better error handling, more likely to have an error than other methods
 @app.route('/api/timeline_post', methods=['DELETE'])
 def delete_time_line_post():
     id = request.args.get('id')
     post = TimelinePost.get_by_id(id)
-    post.delete_instance()
+    post.delete_instance()      # super easy with peewee!
     return {'message': f'Timeline post {id} deleted successfully'}
 
