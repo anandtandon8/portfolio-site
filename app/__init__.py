@@ -5,14 +5,22 @@ from peewee import *
 from flask import Flask, render_template, request
 from dotenv import load_dotenv
 from dateutil import parser
+import re
 
 load_dotenv()
 app = Flask(__name__)
 
-# create a mysql database
-mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"), user=os.getenv("MYSQL_USER"), password=os.getenv("MYSQL_PASSWORD"), host=os.getenv(" MYSQL_HOST"), port=3306)
+if os.getenv("TESTING") == "true":
+    print("Running in test mode")
+    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+else:
+    mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"), 
+                         user=os.getenv("MYSQL_USER"), 
+                         password=os.getenv("MYSQL_PASSWORD"), 
+                         host=os.getenv(" MYSQL_HOST"), 
+                         port=3306)
 
-print(mydb)
+# print(mydb)
 
 # a model (columns) for sql table for timeline posts
 class TimelinePost(Model):
@@ -144,6 +152,15 @@ def timeline():
 
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
+    if 'name' not in request.form or request.form['name'].strip() == "":
+        return "Invalid name", 400
+    if 'email' not in request.form or request.form['email'].strip() == "":
+        return "Invalid email", 400
+    if not re.search(r'(.+?)@(.+?)\.(.+?)', request.form['email']):
+        return "Invalid email", 400
+    if 'content' not in request.form or request.form['content'].strip() == "":
+        return "Invalid content", 400
+    
     name = request.form['name']
     email = request.form['email']
     content = request.form['content']
