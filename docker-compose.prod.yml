@@ -25,6 +25,7 @@ services:
     restart: always
     environment:
       - CERTBOT_EMAIL=anandtandon8@gmail.com
+      - CERTBOT_DOMAINS=anand-tandon.duckdns.org
     ports:
       - 80:80
       - 443:443
