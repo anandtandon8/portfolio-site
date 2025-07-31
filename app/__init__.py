@@ -92,7 +92,7 @@ def index():
 
     travel_map = {
         'title': 'All of the countries I\'ve been to',
-        'description': 'I\'m from Mississauga, Ontario, Canada. Other countries I\'ve been to include the United States, Denmark, Spain, Portugal, Dominican Republic, India, France, and the United Kingdom.',
+        'description': 'I\'m from Mississauga, ON, Canada. Other countries I\'ve been to include the United States, Denmark, Spain, Portugal, Dominican Republic, India, France, and the United Kingdom.',
         'image': './static/img/my-map.png'
     }
 
