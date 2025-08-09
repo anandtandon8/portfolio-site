@@ -30,4 +30,4 @@ jobs:
       
       - name: Run Deploy Script
         run: |
-          ssh my-vps 'cd ${{ secrets.PROJECT_ROOT }} && ls'
+          ssh my-vps 'cd ${{ secrets.PROJECT_ROOT }} && ./scripts/redeploy-site.sh'
