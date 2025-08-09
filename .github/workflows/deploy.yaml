@@ -28,7 +28,8 @@ jobs:
             SSH_TARGET_IP: ${{ secrets.SSH_TARGET_IP }}
             SSH_USER: ${{ secrets.SSH_USER }}
       
-      - name: "SSH Test: Print Root Project Directory"
-        run: ssh my-vps 'cd $PROJECT_ROOT && pwd'
+      - name: Run Deploy Script
+        run: |
+          ssh my-vps './$PROJECT_ROOT/scripts/redeploy-site.sh'
         env:
           PROJECT_ROOT: ${{ secrets.PROJECT_ROOT }}
