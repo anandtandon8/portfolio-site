@@ -73,4 +73,4 @@ jobs:
         run: |
           curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚀 Deployment Successful! View the Workflow run at: $RUN_URL"
         env:
-          RUN_URL: "${{ github.server_url }}/${{ github.repository }}/actions/runs/{{ github.run_id }}"
+          RUN_URL: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
