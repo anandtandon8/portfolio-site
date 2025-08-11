@@ -7,9 +7,33 @@ on:
   workflow_dispatch:
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Run Tests
+    env:
+      TESTING: true
+    steps: 
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with: 
+          python-version: '3.9.21'
+
+      - name: Create Python venv
+        run: python -m venv python3-virtualenv
+
+      - name: Install Dependencies to venv
+        run: python3-virtualenv/bin/pip install -r requirements.txt
+
+      - name: Run Tests
+        run: ./scripts/run_test.sh
+
   deploy:
     name: "Deploy to VPS"
     runs-on: ubuntu-latest
+    needs: test
     steps:
       - name: Configure SSH
         run: |
@@ -29,5 +53,24 @@ jobs:
             SSH_USER: ${{ secrets.SSH_USER }}
       
       - name: Run Deploy Script
+        id: run_deploy_script
         run: |
           ssh my-vps 'cd ${{ secrets.PROJECT_ROOT }} && ./scripts/redeploy-site.sh'
+      
+      - name: Print out Container Status
+        run: |
+          docker compose ps 
+
+      - name: Deployment Unncessful Message
+        if: ${{ failure() && step.run_deploy_script.outcome == 'failure' }}
+        run: |
+          curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚨 Deployment Failed. View failed Run Deploy step in Deploy to VPS at: $RUN_URL"
+        env:
+          RUN_URL: "${{ github.server_url }}/${{ github.repository }}/actions/runs/{{ github.run_id }}"
+
+      - name: Deployment Successful Message
+        if: ${{ success() && step.run_deploy_script.outcome == 'success' }}
+        run: |
+          curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚀 Deployment Successful! View the Workflow run at: $RUN_URL"
+        env:
+          RUN_URL: "${{ github.server_url }}/${{ github.repository }}/actions/runs/{{ github.run_id }}"
