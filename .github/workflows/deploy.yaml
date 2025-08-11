@@ -64,13 +64,13 @@ jobs:
       - name: Deployment Unncessful Message
         if: ${{ failure() && steps.run_deploy_script.outcome == 'failure' }}
         run: |
-          curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚨 Deployment Failed. View failed Run Deploy step in Deploy to VPS at: $RUN_URL"
+          curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚨 Deployment Failed. View failed Run Deploy step in Deploy to VPS at: <$RUN_URL>"
         env:
           RUN_URL: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Deployment Successful Message
         if: ${{ success() && steps.run_deploy_script.outcome == 'success' }}
         run: |
-          curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚀 Deployment Successful! View the Workflow run at: $RUN_URL"
+          curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚀 Deployment Successful! View the Workflow run at: <$RUN_URL>"
         env:
           RUN_URL: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
