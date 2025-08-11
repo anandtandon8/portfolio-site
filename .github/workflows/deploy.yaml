@@ -66,7 +66,7 @@ jobs:
         run: |
           curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚨 Deployment Failed. View failed Run Deploy step in Deploy to VPS at: $RUN_URL"
         env:
-          RUN_URL: "${{ github.server_url }}/${{ github.repository }}/actions/runs/{{ github.run_id }}"
+          RUN_URL: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Deployment Successful Message
         if: ${{ success() && steps.run_deploy_script.outcome == 'success' }}
