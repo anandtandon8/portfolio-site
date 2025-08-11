@@ -59,7 +59,7 @@ jobs:
       
       - name: Print out Container Status
         run: |
-          docker compose ps 
+          ssh my-vps 'cd ${{ secrets.PROJECT_ROOT }} && docker compose ps'
 
       - name: Deployment Unncessful Message
         if: ${{ failure() && steps.run_deploy_script.outcome == 'failure' }}
